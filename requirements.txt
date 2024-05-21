@@ -1,0 +1,2 @@
+openai-whisper
+git+https://github.com/tehzevo/protopost-python
