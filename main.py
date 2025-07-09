@@ -18,12 +18,10 @@ def handle(data):
     with open(tmp.name, "wb") as f:
         #save audio file
         data = base64.b64decode(data)
-        print("data:", data)
         f.write(data)
     
     #run whisper
     text = whisper_model.transcribe(tmp.name)
-    print("text:", text)
     os.remove(tmp.name)
 
     #respond with text
