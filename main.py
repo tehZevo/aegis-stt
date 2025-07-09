@@ -1,10 +1,12 @@
 import os
 import base64
-import tempfile
 import subprocess
-import whisper
+from uuid import uuid4
 
+import whisper
 from protopost import ProtoPost
+
+from utils import save_audio_file
 
 PORT = os.getenv("PORT", 80)
 MODEL = os.getenv("MODEL", "tiny.en")
@@ -13,16 +15,13 @@ whisper_model = whisper.load_model(MODEL)
 
 #data should just be a b64 encoded string
 def handle(data):
-    tmp = tempfile.NamedTemporaryFile(delete=False)
-
-    with open(tmp.name, "wb") as f:
-        #save audio file
-        data = base64.b64decode(data)
-        f.write(data)
+    data = base64.b64decode(data)
+    filename = str(uuid4()) + ".wav"
+    save_audio_file(data, filename)
     
     #run whisper
-    text = whisper_model.transcribe(tmp.name)
-    os.remove(tmp.name)
+    text = whisper_model.transcribe(filename)
+    os.remove(filename)
 
     #respond with text
     return text
