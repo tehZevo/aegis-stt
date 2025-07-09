@@ -2,6 +2,7 @@ import os
 import base64
 import tempfile
 import subprocess
+import whisper
 
 from protopost import ProtoPost
 
