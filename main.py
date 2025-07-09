@@ -3,7 +3,7 @@ import base64
 import tempfile
 import subprocess
 
-from protopost import protopost
+from protopost import ProtoPost
 
 PORT = os.getenv("PORT", 80)
 MODEL = os.getenv("MODEL", "tiny.en")
