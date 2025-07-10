@@ -16,7 +16,7 @@ def handle(data):
     #TODO: use bytesio instead of saving to file
     #see https://community.openai.com/t/openai-whisper-send-bytes-python-instead-of-filename/84786/4
     filename = str(uuid4()) + ".mp3"
-    with open(filename, "rb") as f:
+    with open(filename, "wb") as f:
         f.write(data)
     
     #run whisper
