@@ -5,4 +5,6 @@ services:
     build: .
     ports:
       - "8123:80"
+    environment:
+      FILE_EXT: "mp3" #file extention for whisper to interpret
     restart: unless-stopped
