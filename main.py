@@ -7,7 +7,7 @@ from protopost import ProtoPost
 
 from utils import create_pipeline
 
-PORT = os.getenv("PORT", 8762)
+PORT = os.getenv("PORT", 80)
 MODEL = os.getenv("MODEL", "distil-whisper/distil-small.en")
 FILE_EXT = os.getenv("FILE_EXT", "mp3")
 
