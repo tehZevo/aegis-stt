@@ -3,14 +3,15 @@ import base64
 import time
 from uuid import uuid4
 
-import whisper
 from protopost import ProtoPost
 
-PORT = os.getenv("PORT", 80)
-MODEL = os.getenv("MODEL", "tiny.en")
+from utils import create_pipeline
+
+PORT = os.getenv("PORT", 8762)
+MODEL = os.getenv("MODEL", "distil-whisper/distil-small.en")
 FILE_EXT = os.getenv("FILE_EXT", "mp3")
 
-whisper_model = whisper.load_model(MODEL)
+pipe = create_pipeline(MODEL)
 
 def handle(data):
     t = time.time()
@@ -26,9 +27,9 @@ def handle(data):
     
     #run whisper
     t = time.time()
-    text = whisper_model.transcribe(filename)
-    os.remove(filename)
+    text = pipe(filename)["text"]
     whisper_time = time.time() - t
+    os.remove(filename)
 
     print(
         "timings:",
